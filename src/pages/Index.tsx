@@ -71,19 +71,29 @@ const PRICES = [
 
 const PORTFOLIO = [
   {
-    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/files/2ba36614-dcb1-4968-83cb-9e8e99b45d72.jpg",
-    title: "Покраска металлического забора",
-    tag: "Покраска",
-  },
-  {
-    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/files/1cf31e40-683b-4c9f-9893-5451166ed0da.jpg",
-    title: "Расчистка после пожара",
+    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/bucket/680f0f94-81a9-42d8-93f1-0260c70a02e2.jpg",
+    title: "Демонтаж после пожара — в работе",
     tag: "Демонтаж",
   },
   {
-    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/files/3f9fd460-90c6-43d0-b7d2-ffd287d27dfe.jpg",
-    title: "Покос территории ТСЖ",
-    tag: "Покос",
+    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/bucket/4f4ed591-a153-4503-94d2-8bc0d2daf8a1.jpg",
+    title: "Расчистка и сортировка материалов",
+    tag: "Демонтаж",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/bucket/34492606-01d1-43b7-b9e1-d456480e6208.jpg",
+    title: "Площадка готова под застройку",
+    tag: "Демонтаж",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/bucket/356fbb3e-2277-4022-86b0-19aef7ea339a.png",
+    title: "Покраска деревянной бытовки",
+    tag: "Покраска",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/0fff86fb-f807-43dc-899e-73cb3ab5594f/bucket/01e9db91-d255-40c4-9714-8bcaa4b64322.png",
+    title: "Покраска беседки для детской площадки",
+    tag: "Покраска",
   },
 ];
 
@@ -329,7 +339,7 @@ export default function Index() {
           </div>
           <h2 className="font-display text-4xl md:text-5xl text-white mb-16">Портфолио</h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {PORTFOLIO.map((p) => (
               <div key={p.title} className="group relative overflow-hidden">
                 <div className="aspect-[4/3] overflow-hidden">
@@ -340,11 +350,11 @@ export default function Index() {
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-site/90 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6">
+                <div className="absolute bottom-0 left-0 p-5">
                   <span className="text-gold text-xs tracking-wider uppercase border border-gold/40 px-2 py-0.5 mb-2 inline-block">
                     {p.tag}
                   </span>
-                  <div className="font-display text-white text-lg">{p.title}</div>
+                  <div className="font-display text-white text-base leading-snug">{p.title}</div>
                 </div>
               </div>
             ))}
@@ -449,10 +459,75 @@ export default function Index() {
             ))}
           </div>
 
+          {/* Лист осмотра */}
+          <div className="border border-gold/30 mb-6">
+            <div className="bg-gold/10 border-b border-gold/20 px-6 py-4 flex items-center gap-3">
+              <Icon name="ClipboardCheck" size={20} className="text-gold" />
+              <span className="font-display text-white tracking-wider">Лист осмотра объекта</span>
+              <span className="ml-auto text-gold/60 text-xs tracking-wider uppercase">Заполняется на месте</span>
+            </div>
+            <div className="p-6 grid sm:grid-cols-2 gap-8">
+              <div>
+                <div className="text-gold text-xs tracking-[0.2em] uppercase mb-4 font-body">1. Описание работ</div>
+                <div className="space-y-2">
+                  {[
+                    "Удаление плесени / грибка",
+                    "Антисептическая обработка",
+                    "Грунтовка",
+                    "Покраска (указать кол-во слоёв)",
+                    "Подготовка поверхности (очистка, шлифовка)",
+                    "Шпаклёвка (при необходимости)",
+                  ].map((w) => (
+                    <div key={w} className="flex items-center gap-3 text-sm text-muted-text">
+                      <div className="w-4 h-4 border border-gold/30 flex-shrink-0" />
+                      {w}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="text-gold text-xs tracking-[0.2em] uppercase mb-4 font-body">2. Стоимость работ</div>
+                <div className="space-y-2">
+                  {[
+                    ["Подготовка поверхности", ""],
+                    ["Обработка антисептиком", ""],
+                    ["Покраска (1 слой)", ""],
+                    ["Покраска (2 слой)", ""],
+                    ["Удаление плесени", ""],
+                    ["Выезд и осмотр", "бесплатно"],
+                  ].map(([label, val]) => (
+                    <div key={label} className="flex items-center justify-between text-sm border-b border-gold/10 pb-1">
+                      <span className="text-muted-text">{label}</span>
+                      <span className="text-gold font-display tracking-wider">{val || "_______ ₽"}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center justify-between border-t border-gold/30 pt-3">
+                  <span className="text-white font-display tracking-wider">Итого</span>
+                  <span className="text-gold font-display text-lg tracking-wider">_______ ₽</span>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-gold/20 px-6 py-4 flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+              <div className="text-muted-text text-xs">
+                Гарантия на выполненные работы: <span className="text-gold">12 месяцев</span> · Мастер: Дмитрий Голубничий · ИНН 661914015077
+              </div>
+              <a
+                href="https://vk.com/club234852553"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:ml-auto inline-flex items-center gap-2 border border-gold/40 text-gold px-5 py-2 text-xs tracking-wider uppercase font-body hover:border-gold hover:bg-gold/5 transition-colors whitespace-nowrap"
+              >
+                <Icon name="Download" size={13} />
+                Скачать бланк
+              </a>
+            </div>
+          </div>
+
           <div className="p-6 border border-gold/30 bg-gold/5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Icon name="FolderOpen" size={24} className="text-gold flex-shrink-0" />
             <div>
-              <div className="font-display text-white tracking-wider mb-1">Документы в открытом доступе</div>
+              <div className="font-display text-white tracking-wider mb-1">Все документы в открытом доступе</div>
               <div className="text-muted-text text-sm">Прайс-лист, лист осмотра, справка о самозанятости — в альбоме сообщества ВКонтакте</div>
             </div>
             <a
